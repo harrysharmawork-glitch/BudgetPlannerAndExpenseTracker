@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema(
         email:{
             type : String,
             required : true,
-            unique : true,
-            lowercase : true
+            lowercase : true,
+            index: { unique: true }
         },
 
         password:{
@@ -43,6 +43,14 @@ const userSchema = new mongoose.Schema(
         },
 
         lockUntil:{
+            type : Date
+        },
+
+        resetOtp :{
+            type : String
+        },
+
+        resetOtpExpires :{
             type : Date
         }
     },

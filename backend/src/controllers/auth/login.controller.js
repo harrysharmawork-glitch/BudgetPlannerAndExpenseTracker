@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const signedUpUser = require("../../models/UsersCreate.model");
-
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -34,6 +33,12 @@ exports.login = async (req, res) => {
           process.env.JWT_SECRET_KEY,
           { expiresIn: "5h" }
         );
+
+        res.cookie("JWT_Token", token,{
+          expires : new Date(Date.now()+(5 * 60 * 60 * 1000))
+        });
+        console.log(`Cookie stored: ${token} and will expire after 5 hours`);
+        
         user.loginAttempts = 0;
         user.lockUntil = null;
         user.lastFailedLogin = null;
