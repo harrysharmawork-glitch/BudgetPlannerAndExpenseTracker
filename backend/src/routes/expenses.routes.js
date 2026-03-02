@@ -3,31 +3,46 @@ const router = express.Router();
 
 const {
   SaveExpense,
-} = require("../controllers/BudgetPlanner/ExpenseSave.controller");
+} = require("../controllers/BudgetPlanner/POSTRequests/ExpenseSave.controller");
+const {
+  createBudget,
+} = require("../controllers/BudgetPlanner/POSTRequests/CreateBudget.controller");
 const {
   getAllExpenses,
-} = require("../controllers/BudgetPlanner/GetAllExpense.controller");
+} = require("../controllers/BudgetPlanner/GETRequests/GetAllExpense.controller");
 const {
   getExpenseByEmail,
-} = require("../controllers/BudgetPlanner/GetExpenseByEmail.controller");
+} = require("../controllers/BudgetPlanner/GETRequests/GetExpenseByEmail.controller");
 const {
   deleteExpense,
-} = require("../controllers/BudgetPlanner/DeleteExpense.controller");
+} = require("../controllers/BudgetPlanner/DELETERequests/DeleteExpense.controller");
 const {
   getDeletedExpenses,
-} = require("../controllers/BudgetPlanner/GetDeletedExpense.controller");
+} = require("../controllers/BudgetPlanner/GETRequests/GetDeletedExpense.controller");
 const {
   undoDeleteExpense,
-} = require("../controllers/BudgetPlanner/UndoExpense.controller");
+} = require("../controllers/BudgetPlanner/PATCHRequests/UndoExpense.controller");
 const {
   updateExpense,
-} = require("../controllers/BudgetPlanner/UpdateExpense.controller");
+} = require("../controllers/BudgetPlanner/PUTRequests/UpdateExpense.controller");
 const{
   deleteRecord,
-} = require("../controllers/BudgetPlanner/DeleteRecordTrashBin.controller.js");
+} = require("../controllers/BudgetPlanner/DELETERequests/DeleteRecordTrashBin.controller.js");
+
+const{
+  getExpensesByDate,
+} = require("../controllers/BudgetPlanner/GETRequests/FilterBasedOnDate.controller.js");
+
+const{
+  getExpensesByAmount,
+} = require("../controllers/BudgetPlanner/GETRequests/FilterBasedOnDate.controller.js");
+const {
+  getCategoriesWithoutBudget,
+} = require("../controllers/BudgetPlanner/GETRequests/GetCategoriesWithoutBudget.controller.js");
 const authMiddleware = require("../middleware/auth.middleware");
 
 router.post("/addExpense", authMiddleware, SaveExpense);
+router.post("/budget/create", authMiddleware, createBudget);
 
 router.get("/getAllExpenses", authMiddleware, getAllExpenses);
 router.get("/expenses/user/:email", authMiddleware, getExpenseByEmail);
@@ -46,4 +61,21 @@ router.patch("/expenses/undo/:expenseId", authMiddleware, undoDeleteExpense);
 
 router.delete("/expenses/deletePermanent/:expenseId", authMiddleware, deleteRecord);
 
+router.get(
+  "/expenses/getExpensesByDate/:startingDate/:endingDate",
+  authMiddleware,
+  getExpensesByDate,
+);
+
+router.get(
+  "/expenses/getExpensesByAmount/:startAmount/:endAmount",
+  authMiddleware,
+  getExpensesByAmount,
+);
+
+router.get(
+  "/expenses/categoriesWithoutBudget",
+  authMiddleware,
+  getCategoriesWithoutBudget,
+);
 module.exports = router;

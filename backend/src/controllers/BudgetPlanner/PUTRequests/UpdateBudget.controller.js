@@ -1,4 +1,4 @@
-const Budget = require("../../models/Budget.model");
+const Budget = require("../../../models/Budget.model");
 
 exports.updateBudget = async (req, res) => {
   try {

@@ -1,5 +1,5 @@
-const expenseModel = require("../../models/Expense.model");
-const User = require("../../models/UsersCreate.model");
+const expenseModel = require("../../../models/Expense.model");
+const User = require("../../../models/UsersCreate.model");
 
 exports.getExpenseByEmail = async (req, res) => {
   try {

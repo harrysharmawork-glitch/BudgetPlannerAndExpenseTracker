@@ -27,6 +27,11 @@ const BudgetFixing = new mongoose.Schema(
       type: Number,
       required: true,
     },
+
+    isExceeded: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   { timestamps: true },

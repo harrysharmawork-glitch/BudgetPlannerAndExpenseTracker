@@ -13,7 +13,6 @@ const authMiddleware = (req, res, next) => {
     if (authHeader.startsWith("Bearer ")) {
       authHeader = authHeader.split(" ")[1];
     }
-
     const decoded = jwt.verify(authHeader, process.env.JWT_SECRET_KEY);
     req.user = decoded;
     next();

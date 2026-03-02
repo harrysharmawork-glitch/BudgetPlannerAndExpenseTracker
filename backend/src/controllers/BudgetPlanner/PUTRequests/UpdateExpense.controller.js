@@ -1,4 +1,4 @@
-const expenseModel = require("../../models/Expense.model");
+const expenseModel = require("../../../models/Expense.model");
 
 exports.updateExpense = async (req, res) => {
   try {

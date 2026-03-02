@@ -1,4 +1,4 @@
-const Budget = require("../../models/Budget.model");
+const Budget = require("../../../models/Budget.model");
 exports.getBudgets = async(req,res)=>{
     try{
         const {month, year} = req.query;

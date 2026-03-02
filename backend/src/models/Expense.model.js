@@ -13,7 +13,7 @@ const expenseSchema = new mongoose.Schema(
     },
 
     amount: {
-      type: String,
+      type: Number,
       required: true,
     },
 
@@ -40,10 +40,9 @@ const expenseSchema = new mongoose.Schema(
         "Policies",
         "Entertainment",
         "Other",
-        "Health",
         "EMI",
       ],
-      default: "Others",
+      default: "Other",
     },
 
     paymentMethod: {

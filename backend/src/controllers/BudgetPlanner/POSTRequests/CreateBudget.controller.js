@@ -1,15 +1,21 @@
-const BudgetModel = require("../../models/Budget.model");
+const BudgetModel = require("../../../models/Budget.model");
 exports.createBudget = async (req, res) => {
   try {
     const { month, year, category, limitAmount } = req.body;
     const userId = req.user.userId;
 
+    if(!month || !year || !category || !limitAmount){
+      return res.status(400).json({
+        message: "All fields required!!",
+      }); 
+    }
     const budget = await BudgetModel.create({
       userId,
       month,
       year,
       category,
       limitAmount,
+      isExceeded : false,
     });
 
     if (!budget) {
